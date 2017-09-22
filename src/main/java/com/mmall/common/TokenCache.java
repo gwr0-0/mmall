@@ -18,7 +18,7 @@ public class TokenCache {
     //日志
     private static Logger logger = LoggerFactory.getLogger(TokenCache.class);
     //将token_前缀设为常量
-    public static final String TOKEN_PREFIX = "token_"
+    public static final String TOKEN_PREFIX = "token_";
 
     /**
      *
@@ -42,7 +42,7 @@ public class TokenCache {
     }
 
     public static String getKey(String key) {
-        String value = null;
+        String value;
         try {
             value = localCache.get(key);
             if("null".equals(value)) {

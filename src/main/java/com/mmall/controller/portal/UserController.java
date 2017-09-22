@@ -5,7 +5,6 @@ import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
-import com.sun.org.apache.bcel.internal.generic.IUSHR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,16 +20,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user/")
 public class UserController {
 
-    @Autowired
+    @Autowired //TODO 推荐注入方式？？？
     private IUserService iUserService;
 
-    /**
-     * 用户登录
-     * @param username
-     * @param password
-     * @param session
-     * @return
-     */
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session) {
@@ -97,7 +89,7 @@ public class UserController {
         if (user == null) {
             return ServerResponse.createByErrorMessage("用户未登陆");
         }
-        return iUserService.resetPassword(passwordOld, passwordNew, user)
+        return iUserService.resetPassword(passwordOld, passwordNew, user);
     }
 
     @RequestMapping(value = "update_user_information.do", method = RequestMethod.POST)
@@ -125,7 +117,6 @@ public class UserController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录，需要强制登陆 status=10");
         }
         return iUserService.getUserInformation(currentUser.getId());
-        }
     }
 
 }
