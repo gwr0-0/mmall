@@ -173,7 +173,7 @@
   <select id="selectQuestionByUsername" resultType="String" parameterType="String">
     SELECT question
     FROM mmall_user
-    WHERE usernamer = #{username}
+    WHERE username = #{username}
   </select>
 
   <select id="checkAnswer" resultType="int" parameterType="map">
