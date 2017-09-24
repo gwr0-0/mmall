@@ -45,7 +45,6 @@ public class UserController {
     @ResponseBody
     public ServerResponse<String> register(User user) {
         return iUserService.register(user);
-
     }
 
     @RequestMapping(value = "check_valid.do", method = RequestMethod.POST)
@@ -54,6 +53,9 @@ public class UserController {
         return iUserService.checkValid(str, type);
     }
 
+    /**
+     * 获取登录用户信息
+     */
     @RequestMapping(value = "get_user_info.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpSession session) {
@@ -76,12 +78,15 @@ public class UserController {
         return iUserService.checkAnswer(username, question, answer);
     }
 
-    @RequestMapping(value = "forget_rest_password.do", method = RequestMethod.POST)
+    @RequestMapping(value = "forget_reset_password.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken) {
+    public ServerResponse<String> forgetResetPassword(String username, String passwordNew, String forgetToken) {
         return iUserService.forgetRestPassword(username, passwordNew, forgetToken);
     }
 
+    /***
+     * TODO passwordOld，passwordNew相同情况下应该进行判断
+     */
     @RequestMapping(value = "reset_password.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> resetPassword(HttpSession session, String passwordOld, String passwordNew) {
@@ -92,6 +97,9 @@ public class UserController {
         return iUserService.resetPassword(passwordOld, passwordNew, user);
     }
 
+    /**
+     * 登录状态更新个人信息
+     */
     @RequestMapping(value = "update_user_information.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> updateUserInformation(HttpSession session, User user) {
@@ -109,6 +117,9 @@ public class UserController {
         return response;
     }
 
+    /**
+     * 获取当前登录用户的详细信息，并强制登录
+     */
     @RequestMapping(value = "get_user_information.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInformation(HttpSession session) {
