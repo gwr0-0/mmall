@@ -5,6 +5,7 @@ import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,7 +86,7 @@ public class UserController {
     }
 
     /***
-     * TODO passwordOld，passwordNew相同情况下应该进行判断
+     * 登陆状态下修改本账号密码
      */
     @RequestMapping(value = "reset_password.do", method = RequestMethod.POST)
     @ResponseBody
@@ -93,6 +94,9 @@ public class UserController {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorMessage("用户未登陆");
+        }
+        if (StringUtils.equals(passwordNew, passwordOld)) {
+            return ServerResponse.createByErrorMessage("重置密码不能与原密码相同，请重新输入新密码");
         }
         return iUserService.resetPassword(passwordOld, passwordNew, user);
     }
