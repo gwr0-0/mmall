@@ -17,6 +17,7 @@ public class PropertiesUtil {
 
     private static Properties props;
 
+    //静态代码块，在类被加载的时候执行，且只执行一次，可用于初始化静态变量
     static {
         String fileName = "mmall.properties";
         props = new Properties();
