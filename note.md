@@ -23,3 +23,23 @@ http://localhost:8088/manage/product/save.do?categoryId=1&name=三星洗衣机&s
 	update_time = now(),
 
 否则会导致update_time不更新
+
+##第八章
+
+####1. list.do
+
+当购物车中存在不存在的product_id时，会抛出空指针。实际可能会存在的情况
+
+####2.delete_product.do
+
+不传参时会报空指针
+
+##第九章
+
+####1. update.do
+
+mapper中删除
+
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+
+否则会导致create_time 置空
