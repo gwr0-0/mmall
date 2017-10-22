@@ -27,6 +27,19 @@ public class Cart {
         this.updateTime = updateTime;
     }
 
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", productId=" + productId +
+                ", quantity=" + quantity +
+                ", checked=" + checked +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
+
     public Cart() {
         super();
     }
@@ -86,4 +99,5 @@ public class Cart {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
 }

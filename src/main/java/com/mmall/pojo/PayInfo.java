@@ -30,6 +30,20 @@ public class PayInfo {
         this.updateTime = updateTime;
     }
 
+    @Override
+    public String toString() {
+        return "PayInfo{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", orderNo=" + orderNo +
+                ", payPlatform=" + payPlatform +
+                ", platformNumber='" + platformNumber + '\'' +
+                ", platformStatus='" + platformStatus + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
+
     public PayInfo() {
         super();
     }
@@ -97,4 +111,5 @@ public class PayInfo {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
 }

@@ -7,21 +7,21 @@ public class Shipping {
 
     private Integer userId;
 
-    private String receiverName;
+    private String receiverName;            //收货姓名
 
-    private String receiverPhone;
+    private String receiverPhone;           //收货固定电话
 
-    private String receiverMobile;
+    private String receiverMobile;          //收货移动电话
 
-    private String receiverProvince;
+    private String receiverProvince;        //省份
 
-    private String receiverCity;
+    private String receiverCity;            //城市
 
-    private String receiverDistrict;
+    private String receiverDistrict;        //区/县
 
-    private String receiverAddress;
+    private String receiverAddress;         //详细地址
 
-    private String receiverZip;
+    private String receiverZip;             //邮编
 
     private Date createTime;
 
@@ -40,6 +40,24 @@ public class Shipping {
         this.receiverZip = receiverZip;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Shipping{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", receiverName='" + receiverName + '\'' +
+                ", receiverPhone='" + receiverPhone + '\'' +
+                ", receiverMobile='" + receiverMobile + '\'' +
+                ", receiverProvince='" + receiverProvince + '\'' +
+                ", receiverCity='" + receiverCity + '\'' +
+                ", receiverDistrict='" + receiverDistrict + '\'' +
+                ", receiverAddress='" + receiverAddress + '\'' +
+                ", receiverZip='" + receiverZip + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 
     public Shipping() {

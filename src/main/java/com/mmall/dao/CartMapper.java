@@ -44,4 +44,12 @@ public interface CartMapper {
      * @return
      */
     int selectCartProductCount(@Param("userId") Integer userId);
+
+    /**
+     * 根据用户Id查询购物车中已勾选的内容
+     * checked = 1
+     * @param userId
+     * @return
+     */
+    List<Cart> selectCheckedCartByUserId(Integer userId);
 }
