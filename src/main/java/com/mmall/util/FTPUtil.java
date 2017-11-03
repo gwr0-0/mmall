@@ -69,7 +69,7 @@ public class FTPUtil {
             ftpClient.connect(ip);
             isSuccess = ftpClient.login(user, pwd);
         } catch (IOException e) {
-            logger.error("连接ftp服务器异常");
+            logger.error("连接ftp服务器异常", e);
         }
         return isSuccess;
     }
