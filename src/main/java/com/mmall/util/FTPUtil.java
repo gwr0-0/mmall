@@ -52,6 +52,8 @@ public class FTPUtil {
                 }
             } catch (IOException e) {
                 logger.error("上传文件异常", e);
+                uploaded = false;
+                e.printStackTrace();
             } finally {
                 fis.close();
                 ftpClient.disconnect();
