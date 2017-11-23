@@ -1,3 +1,7 @@
+## 0.0.0.0
+
+1. 购物车cart添加商品后，product模块删除商品，因为对于商品id已经不存在， 则购物车会发生空指针异常
+
 ##第七章
 
 ####1. manage/product/save.do 更新导致create_time置空
