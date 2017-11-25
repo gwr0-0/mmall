@@ -4,8 +4,7 @@ package com.mmall.common;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,10 +12,9 @@ import java.util.concurrent.TimeUnit;
  * 将token放到本地cache并声明有效期
  * Created by gwr0-0 on 2017/9/22.
  */
+@Slf4j
 public class TokenCache {
 
-    //日志
-    private static Logger logger = LoggerFactory.getLogger(TokenCache.class);
     //将token_前缀设为常量
     public static final String TOKEN_PREFIX = "token_";
 
@@ -50,7 +48,7 @@ public class TokenCache {
             }
             return value;
         } catch (Exception e) {
-            logger.error("localCache get error", e);
+            log.error("localCache get error", e);
         }
         return null;
     }
