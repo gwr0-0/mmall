@@ -17,7 +17,7 @@ public class PropertiesUtil {
 
     //静态代码块，在类被加载的时候执行，且只执行一次，可用于初始化静态变量
     static {
-        String fileName = "src/main/resources.beta/mmall.properties";
+        String fileName = "mmall.properties";
         props = new Properties();
         try {
             props.load(new InputStreamReader(PropertiesUtil.class.getClassLoader().getResourceAsStream(fileName),"UTF-8"));
