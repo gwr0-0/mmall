@@ -139,9 +139,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.mmall.pojo.Order" >
     update mmall_order
     <set >
-      <if test="orderNo != null" >
-        order_no = #{orderNo,jdbcType=BIGINT},
-      </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
@@ -179,7 +176,7 @@
         update_time = now(),
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where orderNo = #{orderNo,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mmall.pojo.Order" >
     update mmall_order
