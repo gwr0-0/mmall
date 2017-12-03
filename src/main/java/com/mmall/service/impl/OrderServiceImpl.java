@@ -487,6 +487,7 @@ public class OrderServiceImpl implements IOrderService {
         Order updateOrder = new Order();
         updateOrder.setUserId(userId);
         updateOrder.setStatus(Const.OrderStatusEnum.CANCELED.getCode());
+        updateOrder.setOrderNo(orderNo);
 
         int row = orderMapper.updateByPrimaryKeySelective(updateOrder);
         if (row > 0) {
