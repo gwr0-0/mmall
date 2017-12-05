@@ -17,6 +17,8 @@ public class TokenCache {
 
     //将token_前缀设为常量
     public static final String TOKEN_PREFIX = "token_";
+    //这个值实际用于分布式改造的时候，跟此类一致设为 12h
+    public static final int TOKEN_EXTIME = 60 * 60 * 12;
 
     /**
      *
