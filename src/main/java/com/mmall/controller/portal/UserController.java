@@ -41,6 +41,13 @@ public class UserController {
         return response;
     }
 
+    /**
+     * 退出用户
+     * //TODO 未登录状态下操作会抛出redis.clients.jedis.exceptions.JedisDataException: value sent to redis cannot be null
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @return
+     */
     @RequestMapping(value = "logout.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
