@@ -9,7 +9,7 @@ import com.mmall.pojo.User;
 import com.mmall.service.IShippingService;
 import com.mmall.util.CookieUtil;
 import com.mmall.util.JsonUtil;
-import com.mmall.util.RedisPoolUtil;
+import com.mmall.util.RedisShardePoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +44,7 @@ public class ShippingController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisShardePoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJsonStr, User.class);
         return iShippingService.add(user.getId(), shipping);
     }
@@ -56,7 +56,7 @@ public class ShippingController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisShardePoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJsonStr, User.class);
         return iShippingService.delete(user.getId(), shippingId);
     }
@@ -68,7 +68,7 @@ public class ShippingController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisShardePoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJsonStr, User.class);
         return iShippingService.update(user.getId(), shipping);
     }
@@ -80,7 +80,7 @@ public class ShippingController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisShardePoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJsonStr, User.class);
         return iShippingService.select(user.getId(), shippingId);
     }
@@ -94,7 +94,7 @@ public class ShippingController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisShardePoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJsonStr, User.class);
         return iShippingService.list(user.getId(), pageNum, pageSize);
     }
