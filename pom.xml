@@ -257,6 +257,15 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- SpringSession SSO -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis -->
+    <dependency>
+      <groupId>org.springframework.session</groupId>
+      <artifactId>spring-session-data-redis</artifactId>
+      <version>1.2.0.RELEASE</version>
+    </dependency>
+
+
   </dependencies>
 
 
