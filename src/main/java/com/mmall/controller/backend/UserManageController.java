@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
  * Created by gwr0-0 on 2017/9/23.
  */
 @Controller
-@RequestMapping("/manager/user/")
-public class UserManagerController {
+@RequestMapping("/manage/user/")
+public class UserManageController {
 
     @Autowired
     private IUserService iUserService;

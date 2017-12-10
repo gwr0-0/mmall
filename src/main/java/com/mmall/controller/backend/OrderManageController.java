@@ -1,42 +1,40 @@
 package com.mmall.controller.backend;
 
+import com.github.pagehelper.PageInfo;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
-import com.mmall.service.ICategoryService;
+import com.mmall.service.IOrderService;
 import com.mmall.service.IUserService;
 import com.mmall.util.CookieUtil;
 import com.mmall.util.JsonUtil;
 import com.mmall.util.RedisShardedPoolUtil;
+import com.mmall.vo.OrderVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * TODO 删除品类的功能
- * Created by gwr0-0 on 2017/9/24.
+ * Created by gwr0-0 on 2017/10/21.
  */
 @Controller
-@RequestMapping("/manage/category/")
-public class CategoryManagerController {
+@RequestMapping(value = "/manage/order")
+public class OrderManageController {
 
     @Autowired
     private IUserService iUserService;
     @Autowired
-    private ICategoryService iCategoryService;
+    private IOrderService iOrderService;
 
-    /***
-     * 增加品类节点
-     */
-    @RequestMapping(value = "add_category.do", method = RequestMethod.POST)
+    @RequestMapping("list.do")
     @ResponseBody
-    public ServerResponse addCategory(HttpServletRequest httpServletRequest, String categoryName, @RequestParam(value = "parentId", defaultValue = "0") int parentId) {
+    public ServerResponse<PageInfo> orderList(HttpServletRequest httpServletRequest, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                              @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登陆");
@@ -46,19 +44,15 @@ public class CategoryManagerController {
         //校验是否是管理员
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //是管理员
-            //增加处理分类的逻辑
-            return iCategoryService.addCategory(categoryName, parentId);
+            return iOrderService.manageList(pageNum, pageSize);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
     }
 
-    /**
-     * 更新品类名称
-     */
-    @RequestMapping("set_category_name.do")
+    @RequestMapping("detail.do")
     @ResponseBody
-    public ServerResponse setCategoryName(HttpServletRequest httpServletRequest, Integer categoryId, String categoryName) {
+    public ServerResponse<OrderVo> detail(HttpServletRequest httpServletRequest, Long orderNo) {
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登陆");
@@ -68,16 +62,17 @@ public class CategoryManagerController {
         //校验是否是管理员
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //是管理员
-            //更新categoryName
-            return iCategoryService.updateCategoryName(categoryId, categoryName);
+            return iOrderService.manageDetail(orderNo);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
     }
 
-    @RequestMapping("get_category.do")
+    @RequestMapping("search.do")
     @ResponseBody
-    public ServerResponse getChildrenParallelCategory(HttpServletRequest httpServletRequest, @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
+    public ServerResponse<PageInfo> orderSearch(HttpServletRequest httpServletRequest, Long orderNo,
+                                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                               @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登陆");
@@ -87,16 +82,15 @@ public class CategoryManagerController {
         //校验是否是管理员
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //是管理员
-            //查询子节点的category信息，并且不递归，保持平级
-            return iCategoryService.getChildrenParallelCategory(categoryId);
+            return iOrderService.manageSearch(orderNo, pageNum, pageSize);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
     }
 
-    @RequestMapping("get_deep_category.do")
+    @RequestMapping("send_goods.do")
     @ResponseBody
-    public ServerResponse getCategoryAndDeepChildrenCategory(HttpServletRequest httpServletRequest, @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId) {
+    public ServerResponse<String> orderSendGoods(HttpServletRequest httpServletRequest, Long orderNo) {
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登陆");
@@ -106,10 +100,10 @@ public class CategoryManagerController {
         //校验是否是管理员
         if (iUserService.checkAdminRole(user).isSuccess()) {
             //是管理员
-            //查询当前节点的id和递归子节点的id
-            return iCategoryService.selectCategoryAndChildrenById(categoryId);
+            return iOrderService.manageSendGoods(orderNo);
         } else {
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }
     }
+
 }
