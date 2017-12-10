@@ -9,7 +9,7 @@ import redis.clients.jedis.ShardedJedis;
  * @date 2017/12/1
  */
 @Slf4j
-public class RedisShardePoolUtil {
+public class RedisShardedPoolUtil {
 
     public static String set(String key, String value) {
         ShardedJedis jedis = null;
@@ -104,15 +104,15 @@ public class RedisShardePoolUtil {
     public static void main(String[] args) {
         ShardedJedis jedis = RedisShardedPool.getJedis();
 
-        RedisShardePoolUtil.set("gao", "0-0");
+        RedisShardedPoolUtil.set("gao", "0-0");
         for (int i = 0; i< 10; i++) {
             jedis.set("kye" + i, "value" + i);
         }
-        String value = RedisShardePoolUtil.get("gao");
+        String value = RedisShardedPoolUtil.get("gao");
 
-        RedisShardePoolUtil.setEx("wan", "rui", 60*5);
-        RedisShardePoolUtil.expire("gao", 60*10);
-        //RedisShardePoolUtil.del("wan");
+        RedisShardedPoolUtil.setEx("wan", "rui", 60*5);
+        RedisShardedPoolUtil.expire("gao", 60*10);
+        //RedisShardedPoolUtil.del("wan");
 
         System.out.println("~~~~~~~~~~END~~~~~~~");
 
