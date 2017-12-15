@@ -73,8 +73,7 @@ public class OrderController {
 
     /**
      * 获得购物车中已经选中的商品
-     * 为未来的预下单预留
-     * TODO 预下单
+     * 预下单，确认订单页
      * @param session
      * @return
      */

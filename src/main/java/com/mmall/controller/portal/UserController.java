@@ -44,6 +44,7 @@ public class UserController {
     /**
      * 退出用户
      * //TODO 未登录状态下操作会抛出redis.clients.jedis.exceptions.JedisDataException: value sent to redis cannot be null
+     * //TODO jredis v2.6.3, Deprecates JedisPool returnResource and returnBrokenResource。但是还没有替代的方法，大概3.0见
      * @param httpServletRequest
      * @param httpServletResponse
      * @return
