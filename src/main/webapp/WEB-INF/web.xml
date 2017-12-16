@@ -34,6 +34,16 @@
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
 
+    <!-- SpringSession框架 和自己实现的redis二选一 -->
+    <!--<filter>-->
+        <!--<filter-name>springSessionRepositoryFilter</filter-name>-->
+        <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>springSessionRepositoryFilter</filter-name>-->
+        <!--<url-pattern>*.do</url-pattern>-->
+    <!--</filter-mapping>-->
+
     <!-- web容器启动和关闭的监听器 -->
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
