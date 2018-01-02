@@ -79,7 +79,8 @@ public class RedisShardedPoolUtil {
      * 更新生存时间，更新成功返回 1， 否则返回 0
      * @param key
      * @param exTime
-     * @return
+     * @return 1: the timeout was set.
+     *          0: the timeout was not set
      */
     public static Long expire(String key, int exTime) {
         ShardedJedis jedis = null;
