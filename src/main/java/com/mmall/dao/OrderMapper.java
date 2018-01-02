@@ -46,4 +46,15 @@ public interface OrderMapper {
      */
     List<Order> selectAllOrder();
 
+    /**
+     * 定时关单，
+     */
+    List<Order> selectOrderStatusByCreateTime(@Param("status") Integer status, @Param("date") String date);
+
+    /**
+     * 根据订单id 关闭订单， status = 0
+     * @param id
+     */
+    void closeOrderByOrderId(Integer id);
+
 }

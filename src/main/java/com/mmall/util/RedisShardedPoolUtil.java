@@ -51,6 +51,31 @@ public class RedisShardedPoolUtil {
     }
 
     /**
+     * SETNX actually means "SET if Not eXists".
+     * @param key
+     * @param value
+     * @return Integer reply, specifically:
+     *          1 if the key was set
+     *          0 if the key was not set
+     *
+     */
+    public static Long setNx(String key, String value) {
+        ShardedJedis jedis = null;
+        Long result = null;
+        try {
+            jedis = RedisShardedPool.getJedis();
+            result = jedis.setnx(key, value);
+        } catch (Exception e) {
+            log.error("setNx key:{} value:{} error", key, value, e);
+            RedisShardedPool.returnBrokenResource(jedis);
+            return result;
+        }
+        RedisShardedPool.returnResource(jedis);
+        return result;
+    }
+
+
+    /**
      * 更新生存时间，更新成功返回 1， 否则返回 0
      * @param key
      * @param exTime
